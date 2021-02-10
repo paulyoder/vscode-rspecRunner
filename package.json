@@ -2,7 +2,7 @@
 	"name": "rspecRunner",
 	"displayName": "RspecRunner",
 	"description": "Runs rspec in the terminal for the current file",
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"publisher": "paul-yoder",
 	"engines": {
 		"vscode": "^1.50.0"
@@ -11,7 +11,8 @@
 		"Other"
 	],
 	"activationEvents": [
-		"onCommand:rspecRunner.run"
+		"onCommand:rspecRunner.run",
+		"onCommand:rspecRunner.runForLine"
 	],
 	"main": "./out/extension.js",
 	"contributes": {
@@ -19,6 +20,10 @@
 			{
 				"command": "rspecRunner.run",
 				"title": "Rspec Run"
+			},
+			{
+				"command": "rspecRunner.runForLine",
+				"title": "Rspec Run for Line"
 			}
 		]
 	},

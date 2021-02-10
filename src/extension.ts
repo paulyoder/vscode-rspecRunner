@@ -13,7 +13,7 @@ export function activate(context: vscode.ExtensionContext) {
 	// The command has been defined in the package.json file
 	// Now provide the implementation of the command with registerCommand
 	// The commandId parameter must match the command field in package.json
-	let disposable = vscode.commands.registerCommand('rspecRunner.run', () => {
+	let run = vscode.commands.registerCommand('rspecRunner.run', () => {
 		let document = vscode.window.activeTextEditor?.document;
 		let terminal = vscode.window.terminals[0];
 		if (document == null) {
@@ -37,7 +37,38 @@ export function activate(context: vscode.ExtensionContext) {
 		terminal.sendText(`bundle exec rspec ${relativePath}`);
 	});
 
-	context.subscriptions.push(disposable);
+	context.subscriptions.push(run);
+
+	let runForLine = vscode.commands.registerCommand('rspecRunner.runForLine', () => {
+		let document = vscode.window.activeTextEditor?.document;
+		let terminal = vscode.window.terminals[0];
+		if (document == null) {
+			vscode.window.showErrorMessage('No active text editor');
+			return;
+		}
+		if (terminal == null) {
+			vscode.window.showErrorMessage('No active terminal');
+			return;
+		}
+
+		let relativePath = vscode.workspace.asRelativePath(document.uri.path);
+		if (!relativePath.includes('.rb')) {
+			vscode.window.showErrorMessage('Can only run rspec tests on Ruby files');
+			return;
+		}
+		if (relativePath.includes('_spec.rb')) {
+			let position = vscode.window.activeTextEditor?.selection?.active;
+			if (position) {
+				relativePath = `${relativePath}:${position.line + 1}`;
+		}
+		} else {
+			relativePath = relativePath.replace('app/', 'spec/').replace('.rb', '_spec.rb');
+		}
+
+		terminal.sendText(`bundle exec rspec ${relativePath}`);
+	});
+
+	context.subscriptions.push(runForLine);
 }
 
 // this method is called when your extension is deactivated
