@@ -34,7 +34,9 @@ export function activate(context: vscode.ExtensionContext) {
 			relativePath = relativePath.replace('app/', 'spec/').replace('.rb', '_spec.rb');
 		}
 
-		terminal.sendText(`bundle exec rspec ${relativePath}`);
+		document.save().then(() => {
+			terminal.sendText(`bundle exec rspec ${relativePath}`);
+		});
 	});
 
 	context.subscriptions.push(run);
@@ -65,7 +67,9 @@ export function activate(context: vscode.ExtensionContext) {
 			relativePath = relativePath.replace('app/', 'spec/').replace('.rb', '_spec.rb');
 		}
 
-		terminal.sendText(`bundle exec rspec ${relativePath}`);
+		document.save().then(() => {
+			terminal.sendText(`bundle exec rspec ${relativePath}`);
+		});
 	});
 
 	context.subscriptions.push(runForLine);

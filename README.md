@@ -16,14 +16,4 @@ None
 This extension contributes the following settings:
 
 * `rspecRunner.run`: run rspec on the active file
-
-
-## Release Notes
-
-### 0.0.1
-
-Initial release
-
-### 0.0.2
-
-Added `rspecRunner.runForLine`
+* `rspecRunner.runForLine`: run rspec for the current line the cursor is on
