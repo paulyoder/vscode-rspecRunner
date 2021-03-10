@@ -2,7 +2,7 @@
 	"name": "rspecRunner",
 	"displayName": "RspecRunner",
 	"description": "Runs rspec in the terminal for the current file",
-	"version": "0.0.3",
+	"version": "0.0.4",
 	"publisher": "paul-yoder",
 	"engines": {
 		"vscode": "^1.50.0"

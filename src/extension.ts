@@ -36,6 +36,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 		document.save().then(() => {
 			terminal.sendText(`bundle exec rspec ${relativePath}`);
+			vscode.commands.executeCommand('workbench.action.terminal.scrollToBottom');
 		});
 	});
 
@@ -69,6 +70,7 @@ export function activate(context: vscode.ExtensionContext) {
 
 		document.save().then(() => {
 			terminal.sendText(`bundle exec rspec ${relativePath}`);
+			vscode.commands.executeCommand('workbench.action.terminal.scrollToBottom');
 		});
 	});
 
